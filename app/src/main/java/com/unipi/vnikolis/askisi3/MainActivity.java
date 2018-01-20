@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
                 //myTTS.speak("Your latitude is " + latitude + "and your longitude is" + longitude);
 
-                //και σου λεει σε ποια διευθυνση βρισκεσαιd
+                //και σου λεει σε ποια διευθυνση βρισκεσαι
                 Geocoder gcd = new Geocoder(this, Locale.getDefault());
                 List<Address> addresses = null;
                 try {
