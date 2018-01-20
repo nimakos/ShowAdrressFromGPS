@@ -18,8 +18,10 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements LocationListener{
 
@@ -69,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                     String ad = addresses.get(0).getLocality();
                     myTTS.speak("Your address is"+ ad);
                     Toast.makeText(this,addresses.get(0).toString(),Toast.LENGTH_LONG).show();
+                    Locale[] aa = Locale.getAvailableLocales();
+                    Toast.makeText(this, Arrays.toString(aa),Toast.LENGTH_LONG).show();
 
                 }
 
