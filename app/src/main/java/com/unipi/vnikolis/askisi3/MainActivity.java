@@ -71,9 +71,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                     String ad = addresses.get(0).getLocality();
                     myTTS.speak("Your address is"+ ad);
                     Toast.makeText(this,addresses.get(0).toString(),Toast.LENGTH_LONG).show();
-                    Locale[] aa = Locale.getAvailableLocales();
-                    Toast.makeText(this, Arrays.toString(aa),Toast.LENGTH_LONG).show();
 
+
+
+
+                }
+                Locale aa [] = Locale.getAvailableLocales();
+                for(Locale a : aa){
+                    System.out.println(a.toString());
                 }
 
 
@@ -119,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "el_GR");
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Please say something");
         startActivityForResult(intent,VOICE_REC_RESULT);
     }
