@@ -72,13 +72,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
                     addresses = gcd.getFromLocation(latitude,longitude,1);
                     if(addresses.size() > 0){
-                        String ad = addresses.get(0).getLocality();
+                        String ad = addresses.get(0).getAddressLine(0);
 
-                        myTTS.speak("Your address is"+ ad);
+                        myTTS.speak("Η διευθυνσή σας είναι"+ ad);
                         Toast.makeText(this,addresses.get(0).toString(),Toast.LENGTH_LONG).show();
                     }
                     else{
-                        myTTS.speak("Nothing found");
+                        myTTS.speak("Δεν βρέθηκε κάτι");
                     }
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();

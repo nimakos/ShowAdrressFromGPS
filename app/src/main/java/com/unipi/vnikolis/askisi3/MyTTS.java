@@ -20,7 +20,7 @@ public class MyTTS {
             public void onInit(int status) {
                 //σε τι γλωσσα θελω να ξεκινησω
                 if (status == TextToSpeech.SUCCESS)
-                    tts.setLanguage(Locale.US);
+                    tts.setLanguage(Locale.ROOT);
 
             }
         };
