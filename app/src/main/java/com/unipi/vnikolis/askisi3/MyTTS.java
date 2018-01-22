@@ -12,17 +12,18 @@ import java.util.Locale;
 public class MyTTS {
 
     private TextToSpeech tts;
-    private TextToSpeech.OnInitListener initListener = new TextToSpeech.OnInitListener() {
-        @Override
-        public void onInit(int status) {
-            //σε τι γλωσσα θελω να ξεκινησω
-            if(status==TextToSpeech.SUCCESS)
-                tts.setLanguage(Locale.US);
 
-        }
-    };
     public MyTTS(Context context) //Constractor
     {
+        TextToSpeech.OnInitListener initListener = new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                //σε τι γλωσσα θελω να ξεκινησω
+                if (status == TextToSpeech.SUCCESS)
+                    tts.setLanguage(Locale.US);
+
+            }
+        };
         tts = new TextToSpeech(context, initListener);
     }
 
