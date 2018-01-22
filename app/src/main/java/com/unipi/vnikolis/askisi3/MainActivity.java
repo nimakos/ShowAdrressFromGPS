@@ -51,44 +51,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
             //Με το που πεις location on ανοιγει το gps
-            // Toast.makeText(this,matches.toString(),Toast.LENGTH_LONG).show();
             if (matches.contains("location on"))
             {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
                     ActivityCompat.requestPermissions(this,new String [] {Manifest.permission.ACCESS_FINE_LOCATION}, 543);
                 else
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1,1,this);
-                    // σου λεει σε ποια διευθυνση βρισκεσαι
-                    gcd = new Geocoder(this, Locale.getDefault());
 
-
-                //myTTS.speak("Your latitude is " + latitude + "and your longitude is" + longitude);
-
-
-
-                try {
-
-                    if(counter == 1)
-                    {
-                        TimeUnit.SECONDS.sleep(10);
-                    }
-
-                    addresses = gcd.getFromLocation(latitude,longitude,1);
-                    if(addresses.size() > 0){
-                        String ad = addresses.get(0).getAddressLine(0);
-                        myTTS.speak("Η διευθυνσή σας είναι"+ ad);
-                        Toast.makeText(this,addresses.get(0).toString(),Toast.LENGTH_LONG).show();
-                    }
-                    else{
-                        myTTS.speak("Δεν βρέθηκε κάτι");
-                    }
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-               /* Locale aa [] = Locale.getAvailableLocales();
-                for(Locale a : aa){
-                    System.out.println(a.toString());
-                }*/
+                findAddress();
             }
 
             if (matches.contains("location off"))
@@ -98,7 +68,32 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                 else
                     locationManager.removeUpdates(this);
             }
+        }
+    }
 
+    public void findAddress(){
+        // σου λεει σε ποια διευθυνση βρισκεσαι
+        gcd = new Geocoder(this, Locale.getDefault());
+
+        try {
+
+            if(counter == 1)
+            {
+                TimeUnit.SECONDS.sleep(2);
+            }
+
+            //βρες σπο τις συντεταγμενες την τοποθεσια και αποθηκευσε την στη λιστα
+            addresses = gcd.getFromLocation(latitude,longitude,1);
+            if(addresses.size() > 0){
+                String ad = addresses.get(0).getAddressLine(0);
+                myTTS.speak("Βρισκόσαστε στην οδό"+ ad);
+                Toast.makeText(this,addresses.get(0).toString(),Toast.LENGTH_LONG).show();
+            }
+            else{
+                myTTS.speak("Δεν βρέθηκε κάτι");
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
 
     }

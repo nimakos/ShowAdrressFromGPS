@@ -9,6 +9,7 @@ import java.util.Locale;
  * Created by Βαγγέλης on 20/1/2018.
  */
 
+//κλάσση για να κανει speak οτι του δηλωσεις(φτιαχνουμε τα settings εδω)
 public class MyTTS {
 
     private TextToSpeech tts;
