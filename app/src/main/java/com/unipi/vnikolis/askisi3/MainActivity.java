@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements LocationListener{
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     LocationManager locationManager;
     double latitude;
     double longitude;
+    int counter;
 
 
     @Override
@@ -62,27 +64,29 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                 Geocoder gcd = new Geocoder(this, Locale.getDefault());
                 List<Address> addresses = null;
                 try {
+                    counter++;
+                    if(counter == 1)
+                    {
+                        TimeUnit.SECONDS.sleep(5);
+                    }
+
                     addresses = gcd.getFromLocation(latitude,longitude,1);
-                } catch (IOException e) {
+                    if(addresses.size() > 0){
+                        String ad = addresses.get(0).getLocality();
+
+                        myTTS.speak("Your address is"+ ad);
+                        Toast.makeText(this,addresses.get(0).toString(),Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        myTTS.speak("Nothing found");
+                    }
+                } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
-                if(addresses.size() > 0 )
-                {
-                    String ad = addresses.get(0).getLocality();
-                    myTTS.speak("Your address is"+ ad);
-                    Toast.makeText(this,addresses.get(0).toString(),Toast.LENGTH_LONG).show();
-
-
-
-
-
-                }
-                Locale aa [] = Locale.getAvailableLocales();
+               /* Locale aa [] = Locale.getAvailableLocales();
                 for(Locale a : aa){
                     System.out.println(a.toString());
-                }
-
-
+                }*/
             }
 
             if (matches.contains("location off"))
