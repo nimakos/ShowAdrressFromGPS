@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     double latitude;
     double longitude;
     int counter;
+    List<Address> addresses = null;
+    Geocoder gcd;
 
 
     @Override
@@ -55,25 +57,25 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
                     ActivityCompat.requestPermissions(this,new String [] {Manifest.permission.ACCESS_FINE_LOCATION}, 543);
                 else
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000,1,this);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1,1,this);
+                    // σου λεει σε ποια διευθυνση βρισκεσαι
+                    gcd = new Geocoder(this, Locale.getDefault());
 
 
                 //myTTS.speak("Your latitude is " + latitude + "and your longitude is" + longitude);
 
-                //και σου λεει σε ποια διευθυνση βρισκεσαι
-                Geocoder gcd = new Geocoder(this, Locale.getDefault());
-                List<Address> addresses = null;
+
+
                 try {
-                    counter++;
+
                     if(counter == 1)
                     {
-                        TimeUnit.SECONDS.sleep(5);
+                        TimeUnit.SECONDS.sleep(10);
                     }
 
                     addresses = gcd.getFromLocation(latitude,longitude,1);
                     if(addresses.size() > 0){
                         String ad = addresses.get(0).getAddressLine(0);
-
                         myTTS.speak("Η διευθυνσή σας είναι"+ ad);
                         Toast.makeText(this,addresses.get(0).toString(),Toast.LENGTH_LONG).show();
                     }
@@ -127,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
     public void go(View view)
     {
+        counter++;
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "el_GR");
