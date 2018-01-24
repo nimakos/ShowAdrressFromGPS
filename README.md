@@ -4,7 +4,7 @@
 
 # Language : JAVA
 
-# Android Aplication
+# Android Application
 
 Find your current location and find the address you currently are
 
