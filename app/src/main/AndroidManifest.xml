@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.unipi.vnikolis.askisi3">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> <!--μεσω GPS -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/> <!--μεσω NETWORK -->
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application

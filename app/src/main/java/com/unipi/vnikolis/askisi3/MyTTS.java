@@ -9,13 +9,14 @@ import java.util.Locale;
  * Created by Βαγγέλης on 20/1/2018.
  */
 
-//κλάσση για να κανει speak οτι του δηλωσεις(φτιαχνουμε τα settings εδω)
+//κλάσση για να κανει speak οτι του δηλωσεις(φτιαχνουμε τα settings εδω) Text To Translate
 public class MyTTS {
 
     private TextToSpeech tts;
 
     public MyTTS(Context context) //Constractor
     {
+        //με την κλάσση TextToSpeech καλούμε την μέθοδο OnInitListener η οποία ειναι τυπου interface επιστρεφει δηλαδη interface
         TextToSpeech.OnInitListener initListener = new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
